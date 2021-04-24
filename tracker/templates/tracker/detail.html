@@ -12,20 +12,20 @@
       <form action="" method="post">
       {% csrf_token %}
         {% if show_button_later and show_button_complete %}
-          <button class="btn btn-outline-info btn-lg" name="add_later" type="submit">Хочу посмотреть</button>
+          <button class="btn btn-outline-info btn-lg" name="add_later" type="submit">Going to watch</button>
         {% endif %}
         {% if show_button_complete %}
-          <button class="btn btn-outline-success btn-lg" name="add_complete" type="submit">Полностью посмотрел</button>
+          <button class="btn btn-outline-success btn-lg" name="add_complete" type="submit">Watched all</button>
         {% endif %}
       </form>
     </div>
     {% endif %}
   </div>
   {% if not show_button_later %}
-    <div class="alert alert-info" role="alert">Я хочу посмотреть этот сериал!</div>
+    <div class="alert alert-info" role="alert">I am going to watch this show!</div>
   {% endif %}
   {% if not show_button_complete %}
-    <div class="alert alert-success" role="alert">Я полностью посмотрел этот сериал!</div>
+    <div class="alert alert-success" role="alert">I fully watched this show!</div>
   {% endif %}
   <p></p>
   <div class="row">

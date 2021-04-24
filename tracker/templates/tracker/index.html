@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row">
   <div class="col-sm">
-    <h5 class="text-center">Полностью посмотрел:</h5>
+    <h5 class="text-center">Watched all:</h5>
     {% for serial in serials_complete %}
     <div class="shadow p-3 mb-5 bg-white rounded">
       <div class="row">
@@ -18,17 +18,17 @@
           </div>
 
           <div class="col">
-            <button type="submit" name="set_rating" value="{{ serial.myshows_id }}" class="btn btn-primary">Сохранить</button>
+            <button type="submit" name="set_rating" value="{{ serial.myshows_id }}" class="btn btn-primary">Save</button>
           </div>
         </form>
         {% else %}
         <div class="col">
-          Оценка: {{ serial.rating }}
+          Rating: {{ serial.rating }}
         </div>
         <div class="col">
           <form action="" method="post">
             {% csrf_token %}
-            <button type="submit" name="change_rating" value="{{ serial.myshows_id }}" class="btn btn-primary">Изменить</button>
+            <button type="submit" name="change_rating" value="{{ serial.myshows_id }}" class="btn btn-primary">Change</button>
           </div>
           {% endif %}
         </form>
@@ -39,7 +39,7 @@
     </div>
 
   <div class="col-sm">
-    <h5 class="text-center">Хочу посмотреть:</h5>
+    <h5 class="text-center">Going to watch:</h5>
     {% for serial in serials_later %}
     <div class="shadow p-3 mb-5 bg-white rounded">
       <div class="row">

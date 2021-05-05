@@ -46,6 +46,12 @@ def delete_seriallater(myshows_id, user_id):
         user_link_id = user_id)
     del_serial.delete()
 
+def delete_serialcomplete(myshows_id, user_id):
+    """ Удаление объекта из таблицы SerialComplete """
+    del_serial = SerialComplete.objects.get(
+        myshows_id = myshows_id,
+        user_link_id = user_id)
+    del_serial.delete()
 
 def create_seriallater(response, user):
     """ Добавление объекта в таблицу SerialLater """

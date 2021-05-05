@@ -29,14 +29,22 @@
           <form action="" method="post">
             {% csrf_token %}
             <button type="submit" name="change_rating" value="{{ serial.myshows_id }}" class="btn btn-primary">Change</button>
-          </div>
+        </div>
+        <div class="col">
+          <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" name="del_complete" value="{{ serial.myshows_id }}" class="close" aria-label="Close">
+              <span class="align-text-top" aria-hidden="true"> &times; </span>
+            </button>
+          </form>
+        </div>
           {% endif %}
         </form>
       </div>
-      </div>
+    </div>
       {% endfor %}
         {% include "tracker/pagination.html" with page=serials_complete page_num='page2'%}
-    </div>
+  </div>
 
   <div class="col-sm">
     <h5 class="text-center">Going to watch:</h5>

@@ -2,6 +2,8 @@
 *~
 __pycache__
 myvenv
+env
+.vscode
 /static
 .DS_Store
 HELP.txt

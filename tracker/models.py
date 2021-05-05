@@ -17,7 +17,7 @@ class SerialComplete(models.Model):
     myshows_id = models.PositiveSmallIntegerField(default=0)
     title_eng = models.CharField(max_length=50)
     year = models.PositiveSmallIntegerField(default=0)
-    rating = models.CharField(max_length=50, default='Нет')
+    rating = models.CharField(max_length=50, default='No')
 
     def __str__(self):
         return self.title_eng

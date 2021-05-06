@@ -74,3 +74,7 @@ class MyRegisterFormView(FormView):
         return super(MyRegisterFormView, self).form_valid(form)
     def form_invalid(self, form):
         return super(MyRegisterFormView, self).form_invalid(form)
+
+
+def start(request):
+    return render(request, 'tracker/start.html')

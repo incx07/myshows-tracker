@@ -7,4 +7,5 @@ urlpatterns = [
     path('search/', views.search, name='search_list'),
     path('<int:id>/', views.detail, name='detail'),
     path('accounts/register/', views.MyRegisterFormView.as_view(), name="register"),
+    path('start/', views.start, name='start_page'),
 ]

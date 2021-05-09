@@ -7,7 +7,7 @@
     {% for serial in serials_complete %}
     <div class="shadow p-3 mb-5 bg-white rounded">
       <div class="row">
-        <div class="col-6">
+        <div class="col-5">
           <a href="{% url 'detail' id=serial.myshows_id %}">{{ serial.title_eng }}, {{ serial.year }}</a>
         </div>
         {% if serial_change_id == serial.myshows_id %}

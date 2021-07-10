@@ -23,10 +23,10 @@ def index(request):
     serial_change_id = None
     if 'del_later' in request.POST:
         myshows_id = request.POST['del_later']
-        delete_seriallater(myshows_id, user.id)
+        delete_seriallater(myshows_id, user)
     if 'del_complete' in request.POST:
         myshows_id = request.POST['del_complete']
-        delete_serialcomplete(myshows_id, user.id)
+        delete_serialcomplete(myshows_id, user)
     if 'set_rating' in request.POST:
          form_rating = RatingForm(request.POST)
          if form_rating.is_valid():

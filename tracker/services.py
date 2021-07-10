@@ -39,30 +39,34 @@ def myshows_getbyid(id: str) -> dict:
     return response
 
 
-def delete_seriallater(myshows_id, user_id):
-    """ Удаление объекта из таблицы SerialLater """
-    del_serial = SerialLater.objects.get(
-        myshows_id = myshows_id,
-        user_link_id = user_id)
-    del_serial.delete()
+def delete_seriallater(myshows_id, user):
+    """ Удаление связи пользователя с объектом из таблицы SerialLater """
+    del_serial = SerialLater.objects.get(myshows_id = myshows_id)
+    del_serial.user_link.remove(user)
 
-def delete_serialcomplete(myshows_id, user_id):
+
+def delete_serialcomplete(myshows_id, user):
     """ Удаление объекта из таблицы SerialComplete """
-    del_serial = SerialComplete.objects.get(
-        myshows_id = myshows_id,
-        user_link_id = user_id)
-    del_serial.delete()
+    del_serial = SerialComplete.objects.get(myshows_id = myshows_id)
+    del_serial.user_link.remove(user)
+
 
 def create_seriallater(response, user):
     """ Добавление объекта в таблицу SerialLater """
     myshows_id = response['result']['id']
     title_eng = response['result']['titleOriginal']
     year = response['result']['year']
-    SerialLater.objects.get_or_create(
-        user_link = user,
-        myshows_id = myshows_id,
-        title_eng = title_eng,
-        year = year)
+    try:
+        obj_seriallater = SerialLater.objects.get(myshows_id = myshows_id)
+        obj_seriallater.user_link.add(user)
+    except SerialLater.DoesNotExist:
+        obj_seriallater = SerialLater(
+            myshows_id = myshows_id,
+            title_eng = title_eng,
+            year = year
+            )
+        obj_seriallater.save()
+        obj_seriallater.user_link.add(user)
 
 
 def create_serialcomplete(response, user):
@@ -72,13 +76,19 @@ def create_serialcomplete(response, user):
     myshows_id = response['result']['id']
     title_eng = response['result']['titleOriginal']
     year = response['result']['year']
-    SerialComplete.objects.get_or_create(
-        user_link = user,
-        myshows_id = myshows_id,
-        title_eng = title_eng,
-        year = year)
+    try:
+        obj_serialcomplete = SerialComplete.objects.get(myshows_id = myshows_id)
+        obj_serialcomplete.user_link.add(user)
+    except SerialComplete.DoesNotExist:
+        obj_serialcomplete = SerialComplete(
+            myshows_id = myshows_id,
+            title_eng = title_eng,
+            year = year
+            )
+        obj_serialcomplete.save()
+        obj_serialcomplete.user_link.add(user)
     if SerialLater.objects.filter(myshows_id = myshows_id):
-        delete_seriallater(myshows_id, user.id)
+        delete_seriallater(myshows_id, user)
 
 
 def set_rating(myshows_id, user_id, rating):
@@ -87,7 +97,7 @@ def set_rating(myshows_id, user_id, rating):
     """
     upd_serial = SerialComplete.objects.get(
         myshows_id=myshows_id,
-        user_link_id=user_id)
+        user_link=user_id)
     upd_serial.rating = rating
     upd_serial.save()
 
@@ -119,7 +129,7 @@ def set_button_later(myshows_id, user_id):
     try:
         SerialLater.objects.get(
             myshows_id__exact = myshows_id,
-            user_link_id__exact = user_id)
+            user_link__exact = user_id)
         show_button_later = False
     except ObjectDoesNotExist:
         show_button_later = True
@@ -131,7 +141,7 @@ def set_button_complete(myshows_id, user_id):
     try:
         SerialComplete.objects.get(
             myshows_id__exact = myshows_id,
-            user_link_id__exact = user_id)
+            user_link__exact = user_id)
         show_button_complete = False
     except ObjectDoesNotExist:
         show_button_complete = True
